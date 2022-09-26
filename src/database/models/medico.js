@@ -1,17 +1,17 @@
-'use strict' // para que no se pueda usar variables no definidas
+'use strict' 
 
 module.exports = (sequelize, DataTypes) => {
 
-  let medico = sequelize.define('medico', { // defino el modelo de la tabla medico
+  let Medico = sequelize.define('medico', { 
     id: {
-      type: DataTypes.BIGINT, // tipo de dato
-      autoIncrement: true, // autoincrementable
-      primaryKey: true, // clave primaria 
-      allowNull: false // no permitir nulo
+      type: DataTypes.BIGINT, 
+      autoIncrement: true, 
+      primaryKey: true,  
+      allowNull: false 
     },
-    nombre: { // nombre de la columna
-      type: DataTypes.STRING, // tipo de dato
-      allowNull: false // no puede ser nulo
+    nombre: { 
+      type: DataTypes.STRING, 
+      allowNull: false 
     },
     apellido: {
       type: DataTypes.STRING,
@@ -20,14 +20,17 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
     },
-    edad: {
+    especialidad: {
+      type: DataTypes.STRING,
+    },
+    tiempo_trabajando:{
       type: DataTypes.INTEGER,
     },
-    createdAt: { // fecha de creacion
-      type: DataTypes.DATE, // tipo de dato
-      field: 'created_at', // nombre de la columna
-      defaultValue: DataTypes.NOW, // valor por defecto
-      allowNull: false // no puede ser nulo
+    createdAt: { 
+      type: DataTypes.DATE, 
+      field: 'created_at', 
+      defaultValue: DataTypes.NOW, 
+      allowNull: false 
     },
     updatedAt: {
       type: DataTypes.DATE,
@@ -35,18 +38,18 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: DataTypes.NOW,
       allowNull: false
     },
-    deletedAt: { // fecha de eliminacion
-      type: DataTypes.DATE, // tipo de dato
-      field: 'deleted_at' // nombre de la columna
+    deletedAt: { 
+      type: DataTypes.DATE,
+      field: 'deleted_at'
     }
   }, {
-    paranoid: true, // elimina los registros de forma logica
-    freezeTableName: true, // no va a modificar el nombre de la tabla a plural
+    paranoid: true, 
+    freezeTableName: true, 
   })
 
-  medico.associate = models => {
-    // aca se relacionan las tablas de la base de datos  
+  Medico.associate = models => {
+    
   }
 
-  return medico
+  return Medico
 }

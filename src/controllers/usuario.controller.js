@@ -1,4 +1,5 @@
 
+const models = require('../database/config/index')
 
 module.exports = {
 
