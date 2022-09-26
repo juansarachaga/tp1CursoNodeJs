@@ -1,4 +1,4 @@
-const globalConstants = require('../src/const/globalConstants')
+const globalConstants = require('../../const/globalConstants')
 
 
 module.exports = {
