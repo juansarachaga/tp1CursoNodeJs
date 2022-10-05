@@ -1,4 +1,6 @@
 const models = require("../database/models/index");
+const errors = require("../const/errors")
+
 
 module.exports = {
 
@@ -24,7 +26,8 @@ module.exports = {
                 where: {
                     id: req.params.idUsuario
                 }
-            })            
+            })  
+            if(!user) return(errors.UsarioInexistente)          
 
             res.json({
                 success: true,
