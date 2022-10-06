@@ -52,5 +52,5 @@ module.exports = (sequelize, DataTypes) => {
     Usuario.hasMany(models.archivo_usuario)
   }
 
-  return UsuSario
+  return Usuario
 }
