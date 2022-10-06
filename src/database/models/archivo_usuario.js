@@ -1,31 +1,27 @@
-'use strict' 
+'use strict'
+
+
 
 module.exports = (sequelize, DataTypes) => {
 
-  let Usuario = sequelize.define('usuario', { 
+  let ArchivoUsuario = sequelize.define('archivo_usuario', { 
     id: {
       type: DataTypes.BIGINT, 
       autoIncrement: true, 
       primaryKey: true, 
-      allowNull: false
+      allowNull: false 
     },
-    nombre: { 
-      type: DataTypes.STRING, 
-      allowNull: false
-    },
-    apellido: {
+    nombre: {  //nombre con el que se identifica al archivo por si sube varios 
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true,
     },
-    email: {
+    file: { //nombre del archivo
       type: DataTypes.STRING,
+      allowNull: true
     },
-    edad: {
-      type: DataTypes.INTEGER,
-    },
-    password: {
+    original_name: {  //nombre original del archivo cuando se sube
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     createdAt: { 
       type: DataTypes.DATE, 
@@ -48,9 +44,9 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true, 
   })
 
-  Usuario.associate = models => {
-    Usuario.hasMany(models.archivo_usuario)
+  ArchivoUsuario.associate = models => {
+    ArchivoUsuario.belongsTo(models.usuario) // un archivo pertenece a un usuario
   }
 
-  return UsuSario
+  return ArchivoUsuario
 }

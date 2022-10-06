@@ -1,41 +1,32 @@
 const express = require('express')
-const globalConstants = require('./const/globalConstants.js') 
 const routerConfig = require('./routes/index.routes.js')
+const globalConstants = require('./const/globalConstants.js')
 
 let errorHandler = require('./middlewares/error')
-let createError = require('http-errors') // se utiliza para crear un error personalizado
-
-
+let createError = require('http-errors')
 
 const configuracionApi = (app) => {
-
-    app.use(express.json())
-    app.use(express.urlencoded({extended: true}))
-
-    return;
+  app.use(express.json())
+  app.use(express.urlencoded({ extended: true }))
 };
- 
-const configuracionRouter = (app) => { // configurar las rutas
-    app.use('/api/', routerConfig.rutas_init()) // para acceder a las rutas de la api siempre deberá empezar con /api/
-  
-  
-    app.use(function (req, res, next) { 
-      next(createError(404)) // si no se encuentra la ruta, se envia un error 404
-    })
-    app.use(errorHandler) // configurar el middleware de manejo de errores
-  
-  };
+
+const configuracionRouter = (app) => {
+  app.use('/api/', routerConfig.rutas_init())
+  app.use('/', routerConfig.rutas_auth())
+
+
+  app.use(function (req, res, next) {
+    next(createError(404))
+  })
+  app.use(errorHandler)
+};
 
 const init = () => {
-    
-    const app = express() //crea una instancia de express
-    configuracionApi(app) // configura api
-    configuracionRouter(app)
-    app.listen(globalConstants.PORT)
-    console.log('La Aplicacion se está ejecutando en el puerto: ' + globalConstants.PORT)
-
+  const app = express()
+  configuracionApi(app)
+  configuracionRouter(app)
+  app.listen(globalConstants.PORT)
+  console.log('La aplicacion se está ejecutando en el puerto:' + globalConstants.PORT)
 };
 
-init();
-
-
+init(); 
